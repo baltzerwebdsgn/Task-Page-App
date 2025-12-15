@@ -4,28 +4,119 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Task Page</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header>
-      <div class="card" id=""">
-        <h1>
-          Project
-        </h1>
-        <p>
-          project bar
-        </p>
+    <header class="row-top">
+      <div class="card" id="titleCard">
+        <div class="image-container">
+          <h1 class="overlay-text">Project</h1>
+          <img
+            class="card-img"
+            src="https://picsum.photos/seed/picsum/200/300"
+            alt=""
+          />
+        </div>
+
+        <br />
+        <progress max="100" value="0">0%</progress>
       </div>
-      <div class="card" id=""">
-        <h2>
-          Notes
-        </h2>
+      <div class="card" id="notesCard">
+        <h2>Notes</h2>
         <form>
-          <input type="text"/>
+          <textarea
+            name="textarea"
+            rows="5"
+            cols="10"
+            minlength="10"
+            maxlength="20"
+          >
+Write something here</textarea
+          >
+          <br />
+
+          <input type="submit" value="+" />
+          <input type="reset" value="Clear" />
         </form>
       </div>
-      <div class="timer">
-      
+      <div class="card">
+        <div class="timer-container">
+          <h2 id="timer">30:00</h2>
+        </div>
+        <button type="reset">&#8634;</button>
+        <button type="button">&#9654;&#9208;</button>
       </div>
     </header>
+    <main class="row-bottom">
+      <section class="card span-2">
+        <h2>Project</h2>
+        <span>Critical Task: 0/3</span>
+        <ol>
+          <details class="in-progress">
+            <summary>
+              Task 1<!--Be able to edit the label--><input type="hidden" />
+            </summary>
+            <ul>
+              <li>
+                <input type="checkbox" />
+                <p class="hidden">
+                  Example step<button>edit</button><button>&#9733;</button>
+                </p>
+              </li>
+              <li>
+                <input type="submit" value="+" />
+                <input type="text" value="type here" />
+              </li>
+            </ul>
+          </details>
+          <details class="urgent">
+            <summary>
+              Task 2<!--Be able to edit the label--><input type="hidden" />
+            </summary>
+            <ul>
+              <li>
+                <input type="checkbox" />
+                <p class="hidden">
+                  Example step<button>edit</button><button>&#9733;</button>
+                </p>
+              </li>
+              <li>
+                <input type="submit" value="+" />
+                <input type="text" value="type here" />
+              </li>
+            </ul>
+          </details>
+          <details>
+            <summary>
+              Task 3<!--Be able to edit the label--><input type="hidden" />
+            </summary>
+            <ul>
+              <li>
+                <input type="checkbox" />
+                <p class="hidden">
+                  Example step<button>edit</button><button>&#9733;</button>
+                </p>
+              </li>
+              <li>
+                <input type="submit" value="+" />
+                <input type="text" value="type here" />
+              </li>
+            </ul>
+          </details>
+        </ol>
+      </section>
+      <aside class="card">
+        <h2>Critical Tasks</h2>
+        <div class="answers">
+          <p class="critical">1: <span id="critOne"></span></p>
+          <br />
+          <p class="critical">2: <span id="critTwo"></span></p>
+          <br />
+          <p class="critical">3: <span id="critThree"></span></p>
+        </div>
+      </aside>
+    </main>
+    <footer></footer>
+    <script src="app.js"></script>
   </body>
 </html>

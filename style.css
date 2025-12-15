@@ -1,0 +1,225 @@
+:root {
+  --gap: 20px;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+body {
+  margin: 50px auto;
+  width: 800px;
+  font-family: "Inter", sans-serif;
+  background-color: #f0f0f3;
+}
+.row-top,
+.row-bottom {
+  display: flex;
+  gap: var(--gap);
+  width: 100%;
+  margin-bottom: var(--gap); /* Space between rows */
+}
+
+h2 {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px 45px;
+  font-size: large;
+}
+.card {
+  text-align: center;
+  background-color: #f0f0f3;
+  /* The Border */
+  /* border: 2px solid #e2e2e9; */
+  border-radius: 12px;
+
+  /* The Floating Effect */
+  /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); */
+  box-shadow: -10px -10px 10px rgba(255, 255, 255, 0.7),
+    10px 10px 30px rgba(174, 174, 192, 0.2);
+  border: none;
+
+  /* Positioning & Size */
+  padding: 20px;
+  box-sizing: border-box;
+  flex: 0 0 calc((100% - (2 * var(--gap))) / 3);
+
+  /* Smooth lift on hover */
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: -10px -10px 20px #ffffff, 10px 10px 20px #dadade;
+}
+.card.span-2 {
+  flex: 0 0 calc(((100% - (2 * var(--gap))) / 3) * 2 + var(--gap));
+}
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+  width: 100%;
+  height: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.image-container img {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.overlay-text {
+  z-index: 2;
+  position: relative;
+  width: 100%;
+  /* Styling for legibility */
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px 45px;
+  font-family: sans-serif;
+}
+progress {
+  width: 100%;
+  height: 20px;
+  appearance: none; /* Removes default browser styling */
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+}
+
+/* Color for the bar background */
+progress::-webkit-progress-bar {
+  background-color: #eee;
+}
+
+/* Color for the progress value */
+progress::-webkit-progress-value {
+  background-color: #4caf50; /* Green */
+  transition: width 0.5s ease;
+}
+
+textarea {
+  resize: none;
+  width: 100%;
+  height: 180px; /* Adjusted to fit the card better */
+  padding: 16px;
+  box-sizing: border-box;
+  font-family: inherit;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fafafa;
+  outline: none;
+}
+
+textarea:focus {
+  border-color: #333; /* Darker border when typing */
+  background-color: #fff;
+}
+.timer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 300px;
+}
+#timer {
+  margin: 0;
+  width: 100%;
+  height: auto;
+
+  /* Styling for legibility */
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px 45px;
+
+  font-size: xx-large;
+}
+
+details ul li {
+  display: flex;
+  align-items: center; /* Aligns them perfectly in the middle vertically */
+  gap: 10px; /* Adds even spacing between each element */
+}
+
+/* Ensure the paragraph doesn't have extra bottom margin */
+details ul li p {
+  margin: 0;
+  display: inline; /* Changes it from block to inline behavior */
+}
+summary {
+  display: flex; /* Allows us to align the dot and text */
+  align-items: center; /* Centers the dot vertically with the text */
+  cursor: pointer;
+  list-style: none; /* Hides the default browser arrow */
+}
+
+/* Create the Dot */
+summary::before {
+  content: "";
+  display: inline-block;
+  width: 25px; /* Size of the dot */
+  height: 25px;
+  background-color: #e0e0e0; /* Square color */
+  border-radius: 2px;
+  margin-right: 12px; /* Space between dot and text */
+  background-image: radial-gradient(gray 30%, transparent 35%);
+  flex-shrink: 0; /* Prevents the dot from squishing */
+}
+
+/* Override the dot color for urgent tasks */
+details.urgent summary::before {
+  background-color: #e8d3d3; /* Red */
+  background-image: radial-gradient(#d64545 30%, transparent 35%);
+}
+
+/* Override the dot color for in progress tasks */
+details.in-progress summary::before {
+  background-color: gold;
+  background-image: radial-gradient(yellow 30%, transparent 35%);
+}
+
+input[type="submit"],
+input[type="reset"],
+button {
+  cursor: pointer;
+  padding: 5px 15px;
+  margin-top: 10px;
+  border-radius: 12px;
+  border: none;
+  background-color: #f0f0f3;
+  color: black;
+  box-shadow: -10px -10px 30px #ffffff, 10px 10px 30px rgba(174, 174, 192, 0.4),
+    inset -10px -10px 10px rgba(174, 174, 192, 0.25),
+    inset 10px 10px 10px #ffffff;
+  transition: all 0.2s;
+}
+
+input[type="submit"]:hover,
+button:hover {
+  background-color: #f0f0f3;
+  color: black;
+  box-shadow: inset 6px 6px 12px rgba(174, 174, 192, 0.4),
+    inset -6px -6px 12px #ffffff;
+  border: none;
+}
+
+.answers {
+  text-align: left;
+}
+p.critical {
+  width: 100%;
+  background-color: #f0f0f3;
+  border: none;
+  box-shadow: inset 6px 6px 12px rgba(174, 174, 192, 0.4),
+    inset -6px -6px 12px #ffffff;
+  padding: 12px;
+  border-radius: 16px;
+}
