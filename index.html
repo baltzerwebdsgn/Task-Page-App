@@ -24,19 +24,11 @@
       <div class="card" id="notesCard">
         <h2>Notes</h2>
         <form>
-          <textarea
-            name="textarea"
-            rows="5"
-            cols="10"
-            minlength="10"
-            maxlength="20"
-          >
+          <textarea name="textarea" rows="5" cols="10">
 Write something here</textarea
           >
           <br />
-
-          <input type="submit" value="+" />
-          <input type="reset" value="Clear" />
+          <input type="reset" value="Clear" id="clear-notes-button" />
         </form>
       </div>
       <div class="card">
@@ -50,68 +42,78 @@ Write something here</textarea
     <main class="row-bottom">
       <section class="card span-2">
         <h2>Project</h2>
-        <span>Critical Task: 0/3</span>
+        <span>Starred Tasks: 0/3</span>
         <ol>
           <details class="in-progress">
             <summary>
-              Task 1<!--Be able to edit the label--><input type="hidden" />
+              <input type="text" class="task-title" value="TASK ONE" />
             </summary>
-            <ul>
+            <ul id="taskOneList">
               <li>
-                <input type="checkbox" />
-                <p class="hidden">
-                  Example step<button>edit</button><button>&#9733;</button>
-                </p>
+                <input type="checkbox" class="neu-checkbox" />
+                <input class="tasks" type="text" value="Example step" />
+                <button>&#128473;</button>
+                <input
+                  type="checkbox"
+                  class="neu-checkbox star-task limited"
+                  disabled
+                />
               </li>
               <li>
-                <input type="submit" value="+" />
-                <input type="text" value="type here" />
+                <input type="checkbox" class="neu-checkbox" />
+                <input class="tasks" type="text" value="Example step" />
+                <button>&#128473;</button>
+                <input type="checkbox" class="neu-checkbox star-task" />
+              </li>
+              <li>
+                <input type="checkbox" class="neu-checkbox" />
+                <input class="tasks" type="text" value="Example step" />
+                <button>&#128473;</button>
+                <input type="checkbox" class="neu-checkbox star-task" />
+              </li>
+              <li class="new-task-line">
+                <input type="submit" value="+" class="add-task" />
+                <input type="text" value="Type here" class="add-task" />
               </li>
             </ul>
           </details>
           <details class="urgent">
             <summary>
-              Task 2<!--Be able to edit the label--><input type="hidden" />
+              <input type="text" class="task-title" value="TASK TWO" />
             </summary>
             <ul>
-              <li>
-                <input type="checkbox" />
-                <p class="hidden">
-                  Example step<button>edit</button><button>&#9733;</button>
-                </p>
-              </li>
-              <li>
-                <input type="submit" value="+" />
-                <input type="text" value="type here" />
+              <li class="new-task-line">
+                <input type="submit" value="+" class="add-task" />
+                <input type="text" value="Type here" class="add-task" />
               </li>
             </ul>
           </details>
           <details>
             <summary>
-              Task 3<!--Be able to edit the label--><input type="hidden" />
+              <input type="text" class="task-title" value="TASK THREE" />
             </summary>
             <ul>
               <li>
-                <input type="checkbox" />
-                <p class="hidden">
-                  Example step<button>edit</button><button>&#9733;</button>
-                </p>
+                <input type="checkbox" class="neu-checkbox" />
+                <input class="tasks" type="text" value="Example step" />
+                <button>&#128473;</button>
+                <input type="checkbox" class="neu-checkbox star-task" />
               </li>
-              <li>
-                <input type="submit" value="+" />
-                <input type="text" value="type here" />
+              <li class="new-task-line">
+                <!-- <form> -->
+                <input type="submit" value="+" class="add-task" />
+                <input type="text" value="Type here" class="add-task" />
+                <!-- </form> -->
               </li>
             </ul>
           </details>
         </ol>
       </section>
       <aside class="card">
-        <h2>Critical Tasks</h2>
+        <h2>Starred Tasks</h2>
         <div class="answers">
           <p class="critical">1: <span id="critOne"></span></p>
-          <br />
           <p class="critical">2: <span id="critTwo"></span></p>
-          <br />
           <p class="critical">3: <span id="critThree"></span></p>
         </div>
       </aside>

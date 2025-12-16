@@ -34,7 +34,6 @@ h2 {
   border-radius: 12px;
 
   /* The Floating Effect */
-  /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); */
   box-shadow: -10px -10px 10px rgba(255, 255, 255, 0.7),
     10px 10px 30px rgba(174, 174, 192, 0.2);
   border: none;
@@ -89,7 +88,7 @@ h2 {
 progress {
   width: 100%;
   height: 20px;
-  appearance: none; /* Removes default browser styling */
+  appearance: none;
   border-radius: 10px;
   overflow: hidden;
   border: 1px solid #ddd;
@@ -109,19 +108,39 @@ progress::-webkit-progress-value {
 textarea {
   resize: none;
   width: 100%;
-  height: 180px; /* Adjusted to fit the card better */
+  height: 225px; /* Adjusted to fit the card better */
   padding: 16px;
   box-sizing: border-box;
   font-family: inherit;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #fafafa;
+  /* border: 1px solid #ccc; */
+  border-radius: 12px;
+  /* background-color: #fafafa; */
   outline: none;
+  background-color: #f0f0f3;
+  box-shadow: inset 4px 4px 8px rgba(174, 174, 192, 0.3),
+    inset -4px -4px 8px #ffffff;
+  border: none;
 }
 
 textarea:focus {
   border-color: #333; /* Darker border when typing */
   background-color: #fff;
+}
+input[type="text"] {
+  font-family: inherit;
+  outline: none;
+  background-color: #f0f0f3;
+  box-shadow: inset 4px 4px 8px rgba(174, 174, 192, 0.3),
+    inset -4px -4px 8px #ffffff;
+  border: none;
+  padding: 12px;
+}
+input.task-title,
+input.tasks {
+  cursor: text;
+  box-shadow: none;
+  font-family: inherit;
+  font-size: medium;
 }
 .timer-container {
   display: flex;
@@ -145,8 +164,10 @@ textarea:focus {
 
 details ul li {
   display: flex;
-  align-items: center; /* Aligns them perfectly in the middle vertically */
-  gap: 10px; /* Adds even spacing between each element */
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px; /* Adds even spacing between each element */
+  margin: 5px 0;
 }
 
 /* Ensure the paragraph doesn't have extra bottom margin */
@@ -159,6 +180,7 @@ summary {
   align-items: center; /* Centers the dot vertically with the text */
   cursor: pointer;
   list-style: none; /* Hides the default browser arrow */
+  background-color: #f0f0f3;
 }
 
 /* Create the Dot */
@@ -168,10 +190,11 @@ summary::before {
   width: 25px; /* Size of the dot */
   height: 25px;
   background-color: #e0e0e0; /* Square color */
-  border-radius: 2px;
+  border-radius: 25%;
   margin-right: 12px; /* Space between dot and text */
   background-image: radial-gradient(gray 30%, transparent 35%);
   flex-shrink: 0; /* Prevents the dot from squishing */
+  padding: 20px;
 }
 
 /* Override the dot color for urgent tasks */
@@ -185,24 +208,35 @@ details.in-progress summary::before {
   background-color: gold;
   background-image: radial-gradient(yellow 30%, transparent 35%);
 }
-
+input[type="submit"].add-task,
+input[type="text"].add-task {
+  box-shadow: none;
+  background-color: transparent;
+  padding: 0 19px;
+  font-size: 16px;
+}
 input[type="submit"],
 input[type="reset"],
 button {
   cursor: pointer;
-  padding: 5px 15px;
-  margin-top: 10px;
-  border-radius: 12px;
+  padding: 5px;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
   border: none;
   background-color: #f0f0f3;
   color: black;
-  box-shadow: -10px -10px 30px #ffffff, 10px 10px 30px rgba(174, 174, 192, 0.4),
-    inset -10px -10px 10px rgba(174, 174, 192, 0.25),
-    inset 10px 10px 10px #ffffff;
+  font-size: large;
+  box-shadow: inset 3px 3px 6px rgba(174, 174, 192, 0.4),
+    inset -3px -3px 6px #ffffff;
   transition: all 0.2s;
 }
-
+input[type="reset"]#clear-notes-button {
+  width: 80px;
+  margin-top: 10px;
+}
 input[type="submit"]:hover,
+input[type="reset"]:hover,
 button:hover {
   background-color: #f0f0f3;
   color: black;
@@ -218,8 +252,65 @@ p.critical {
   width: 100%;
   background-color: #f0f0f3;
   border: none;
+  padding: 12px;
+}
+.new-task-line {
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  background-color: #f0f0f3;
+  border: none;
   box-shadow: inset 6px 6px 12px rgba(174, 174, 192, 0.4),
     inset -6px -6px 12px #ffffff;
-  padding: 12px;
   border-radius: 16px;
+  margin-top: 10px;
+}
+
+input[type="checkbox"].neu-checkbox {
+  appearance: none; /* Removes default styling */
+  -webkit-appearance: none;
+  margin: 0;
+  width: 25px;
+  height: 25px;
+  border-radius: 6px;
+  background-color: #f0f0f3;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  position: relative;
+  transition: all 0.2s ease;
+
+  /* The "Dropped In" look (Unchecked) */
+  box-shadow: inset 3px 3px 6px rgba(174, 174, 192, 0.4),
+    inset -3px -3px 6px #ffffff;
+}
+
+/* Hover Effect: Soft Glow */
+input[type="checkbox"].neu-checkbox:hover {
+  box-shadow: inset 4px 4px 8px rgba(174, 174, 192, 0.5),
+    inset -4px -4px 8px #ffffff;
+}
+
+/* The "Checked" state: Popping out or changing color */
+input[type="checkbox"].neu-checkbox:checked {
+  /* This changes the shadow from inset to outer to look like it "popped" up */
+  box-shadow: -2px -2px 5px #ffffff, 2px 2px 5px rgba(174, 174, 192, 0.4);
+}
+
+/* The Checkmark (Visual Feedback) */
+input[type="checkbox"].neu-checkbox:checked::after {
+  content: "✓";
+  color: #4caf50; /* Matches your progress bar green */
+  font-size: 16px;
+  font-weight: bold;
+}
+input[type="checkbox"].star-task:checked::after {
+  content: "\2726";
+  font-size: 16px;
+  color: #d64545;
+}
+input[type="checkbox"].limited:hover {
+  cursor: not-allowed;
 }
