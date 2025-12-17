@@ -34,19 +34,11 @@ function clearNotesArea(button) {
       const currentText = notesElement.value.trim();
 
       if (currentText !== "") {
-        const isConfirmed = confirm;
-        while (answer !== "Y" && answer !== "N") {
-          answer = prompt("Are you sure you want to clear? Y or N");
+        const isConfirmed = confirm("Are you sure you want to clear?");
 
-          if (answer == null) return;
-          answer = answer.toUpperCase();
-          if (answer === "Y") {
-            notesText = "";
-            alert("Your notes have been cleared!");
-            break;
-          } else if (answer == "N") {
-            break;
-          }
+        if (isConfirmed) {
+          currentText = "";
+          alert("Your notes have been cleared!");
         }
       }
     });
@@ -98,6 +90,11 @@ function handleAddStep(event) {
 
   const ulElement = form.closest("ul");
   const formRow = form.parentElement;
+
+  if (!ulElement) {
+    console.error("Could not find the parent list for this form.");
+    return;
+  }
   const newLi = document.createElement("li");
   newLi.innerHTML = `<input type="checkbox" class="neu-checkbox steps"/>
                 <input class="tasks" type="text" value="${stepText}"/>
