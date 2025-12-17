@@ -1,3 +1,4 @@
+//Upon page load
 document.addEventListener("DOMContentLoaded", (event) => {
   //tasks progress bar functionality
   setupProgressTracker("steps", "tasks-progress-bar");
@@ -13,16 +14,19 @@ document.addEventListener("DOMContentLoaded", (event) => {
   } else {
     console.error("The element with the ID '' was not found in the DOM.");
   }
+
+  //Add task steps functionality
+  const addForms = document.querySelectorAll(".add-step-form");
+
+  addForms.forEach((form) => {
+    form.addEventListener("submit", handleAddStep);
+  });
+
   //Remove task step functionality
   const removeButtons = document.querySelectorAll(".remove-step");
 
   removeButtons.forEach((button) => {
-    button.addEventListener("click", function () {
-      const listItemToDelete = this.parentElement;
-      listItemToDelete.remove();
-      //Handles the case when the user deletes a completed task and updates the progress bar
-      setupProgressTracker("steps", "tasks-progress-bar");
-    });
+    attachRemoveStepListener(button);
   });
 });
 const starTaskArray = new Array(3);
@@ -54,4 +58,36 @@ function updateProgress(className, progressElementId) {
     progressBar.value = checkedCounted;
     progressBar.max = totalCheckedboxes;
   }
+}
+function handleAddStep(event) {
+  event.preventDefault();
+
+  const form = event.target;
+  const inputStep = form.querySelector(".add-task-input");
+  const stepText = inputStep.value.trim();
+
+  if (stepText === "") {
+    return;
+  }
+
+  const ulElement = form.closest("ul");
+  const formRow = form.parentElement;
+  const newLi = document.createElement("li");
+  newLi.innerHTML = `<input type="checkbox" class="neu-checkbox steps"/>
+                <input class="tasks" type="text" value="${stepText}"/>
+                <button class="remove-step">&#128473;</button>
+                <input type="checkbox" class="neu-checkbox star-task"/>`;
+
+  ulElement.insertBefore(newLi, formRow);
+
+  inputStep.value = "";
+  inputStep.placeholder = "Enter new step...";
+
+  attachRemoveStepListener(newLi.querySelector(".remove-step"));
+  setupProgressTracker("steps", "tasks-progress-bar");
+}
+function attachRemoveStepListener(button) {
+  button.addEventListener("click", function () {
+    this.parentElement.remove();
+  });
 }
