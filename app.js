@@ -6,14 +6,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
   //Clear notes functionality
   const clearNotesButton = document.getElementById("clear-notes-button");
 
-  if (clearNotesButton) {
-    clearNotesButton.addEventListener("click", function (event) {
-      alert("Your notes have been cleared!");
-      document.getElementById("notes-area").value = "";
-    });
-  } else {
-    console.error("The element with the ID '' was not found in the DOM.");
-  }
+  clearNotesArea(clearNotesButton);
 
   //Add task steps functionality
   const addForms = document.querySelectorAll(".add-step-form");
@@ -29,8 +22,38 @@ document.addEventListener("DOMContentLoaded", (event) => {
     attachRemoveStepListener(button);
   });
 });
+
 const starTaskArray = new Array(3);
 const starTaskCounter = 0;
+
+function clearNotesArea(button) {
+  const notesElement = document.getElementById("notes-area");
+
+  if (button) {
+    button.addEventListener("click", function (event) {
+      const currentText = notesElement.value.trim();
+
+      if (currentText !== "") {
+        const isConfirmed = confirm;
+        while (answer !== "Y" && answer !== "N") {
+          answer = prompt("Are you sure you want to clear? Y or N");
+
+          if (answer == null) return;
+          answer = answer.toUpperCase();
+          if (answer === "Y") {
+            notesText = "";
+            alert("Your notes have been cleared!");
+            break;
+          } else if (answer == "N") {
+            break;
+          }
+        }
+      }
+    });
+  } else {
+    console.error("Clear button not found.");
+  }
+}
 
 function countCheckedCheckboxes(className) {
   const selector = `.${className}:checked`;
@@ -40,6 +63,7 @@ function countCheckedCheckboxes(className) {
 function countAllCheckboxes(className) {
   return document.querySelectorAll(`.${className}`).length;
 }
+
 function setupProgressTracker(className, progressElementId) {
   const allCheckboxes = document.querySelectorAll(`.${className}`);
   allCheckboxes.forEach((checkbox) => {
@@ -49,6 +73,7 @@ function setupProgressTracker(className, progressElementId) {
   });
   updateProgress(className, progressElementId);
 }
+
 function updateProgress(className, progressElementId) {
   const totalCheckedboxes = countAllCheckboxes(className);
   const checkedCounted = countCheckedCheckboxes(className);
@@ -59,6 +84,7 @@ function updateProgress(className, progressElementId) {
     progressBar.max = totalCheckedboxes;
   }
 }
+
 function handleAddStep(event) {
   event.preventDefault();
 
@@ -89,5 +115,7 @@ function handleAddStep(event) {
 function attachRemoveStepListener(button) {
   button.addEventListener("click", function () {
     this.parentElement.remove();
+
+    updateProgress("steps", "tasks-progress-bar");
   });
 }
