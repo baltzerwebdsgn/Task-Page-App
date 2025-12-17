@@ -235,7 +235,15 @@ input[type="reset"]#clear-notes-button {
   width: 80px;
   margin-top: 10px;
 }
-input[type="submit"]:hover,
+input[type="submit"]:hover {
+  padding: auto;
+  background-color: #f0f0f3;
+  color: black;
+  box-shadow: inset 6px 6px 12px rgba(174, 174, 192, 0.4),
+    inset -6px -6px 12px #ffffff;
+  border: none;
+  border-radius: 50%;
+}
 input[type="reset"]:hover,
 button:hover {
   background-color: #f0f0f3;
