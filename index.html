@@ -52,11 +52,11 @@
             <summary>
               <input type="text" class="task-title" value="TASK ONE" />
             </summary>
-            <ul id="taskOneList">
+            <ul id="task-list-1">
               <li>
                 <input type="checkbox" class="neu-checkbox steps" />
                 <input class="tasks" type="text" value="Example step" />
-                <button>&#128473;</button>
+                <button class="remove-step">&#128473;</button>
                 <input
                   type="checkbox"
                   class="neu-checkbox star-task limited"
@@ -66,18 +66,24 @@
               <li>
                 <input type="checkbox" class="neu-checkbox steps" />
                 <input class="tasks" type="text" value="Example step" />
-                <button>&#128473;</button>
+                <button class="remove-step">&#128473;</button>
                 <input type="checkbox" class="neu-checkbox star-task" />
               </li>
               <li>
                 <input type="checkbox" class="neu-checkbox steps" />
                 <input class="tasks" type="text" value="Example step" />
-                <button>&#128473;</button>
+                <button class="remove-step">&#128473;</button>
                 <input type="checkbox" class="neu-checkbox star-task" />
               </li>
               <li class="new-task-line">
-                <input type="submit" value="+" class="add-task" />
-                <input type="text" value="Type here" class="add-task" />
+                <form class="add-step-form" data-list-id="task-list-1">
+                  <input type="submit" value="+" class="add-task" />
+                  <input
+                    type="text"
+                    value="Enter new step..."
+                    class="add-task"
+                  />
+                </form>
               </li>
             </ul>
           </details>
@@ -85,10 +91,16 @@
             <summary>
               <input type="text" class="task-title" value="TASK TWO" />
             </summary>
-            <ul>
+            <ul id="task-list-2">
               <li class="new-task-line">
-                <input type="submit" value="+" class="add-task" />
-                <input type="text" value="Type here" class="add-task" />
+                <form class="add-step-form" data-list-id="task-list-3">
+                  <input type="submit" value="+" class="add-task" />
+                  <input
+                    type="text"
+                    value="Enter new step..."
+                    class="add-task"
+                  />
+                </form>
               </li>
             </ul>
           </details>
@@ -96,18 +108,22 @@
             <summary>
               <input type="text" class="task-title" value="TASK THREE" />
             </summary>
-            <ul>
+            <ul id="task-list-3">
               <li>
                 <input type="checkbox" class="neu-checkbox steps" />
                 <input class="tasks" type="text" value="Example step" />
-                <button>&#128473;</button>
+                <button class="remove-step">&#128473;</button>
                 <input type="checkbox" class="neu-checkbox star-task" />
               </li>
               <li class="new-task-line">
-                <!-- <form> -->
-                <input type="submit" value="+" class="add-task" />
-                <input type="text" value="Type here" class="add-task" />
-                <!-- </form> -->
+                <form class="add-step-form" data-list-id="task-list-3">
+                  <input type="submit" value="+" class="add-task" />
+                  <input
+                    type="text"
+                    value="Enter new step..."
+                    class="add-task"
+                  />
+                </form>
               </li>
             </ul>
           </details>
