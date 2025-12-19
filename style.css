@@ -200,15 +200,21 @@ details.urgent summary::before {
 
 /* Override the dot color for in progress tasks */
 details.in-progress summary::before {
-  background-color: gold;
-  background-image: radial-gradient(yellow 30%, transparent 35%);
+  background-color: #faf3e0;
+  background-image: radial-gradient(#b8860b 30%, transparent 35%);
 }
+/*Override the dot color for completed status */
+details.completed summary::before {
+  background-color: #e8f5e9;
+  background-image: radial-gradient(#2e7d32 30%, transparent 35%);
+}
+
 input[type="submit"].add-task,
 input[type="text"].add-task {
   box-shadow: none;
   background-color: transparent;
-  padding: 0 19px;
   font-size: 16px;
+  margin-left: 50px;
 }
 input[type="submit"],
 button {
@@ -317,8 +323,8 @@ input[type="checkbox"].limited:hover {
 }
 input[type="text"].add-task-input {
   padding: 0;
-  margin: 0 34px;
   width: 225px;
+  margin-left: 30px;
 }
 table {
   display: grid;
@@ -339,7 +345,7 @@ th,
 td {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: ce;
   padding: 8px;
   min-height: 40px;
   border-bottom: 1px solid #eee;
@@ -347,6 +353,7 @@ td {
 td:nth-child(2) {
   justify-content: flex-start;
   padding-left: 15px;
+  display: block;
 }
 .editable-cell {
   text-align: left;
@@ -362,4 +369,8 @@ form {
 }
 p.critical {
   text-align: left;
+}
+.add-step-form {
+  display: flex;
+  justify-content: flex-start;
 }

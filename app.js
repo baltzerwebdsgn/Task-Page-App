@@ -18,6 +18,29 @@ document.addEventListener("DOMContentLoaded", (event) => {
   removeButtons.forEach((button) => {
     attachRemoveStepListener(button);
   });
+
+  const taskSection = document.querySelector(".row-bottom");
+
+  taskSection.addEventListener("change", (e) => {
+    if (e.target.classList.contains("steps")) {
+      updateProgress("steps", "tasks-progress-bar");
+    }
+
+    if (e.target.classList.contains("star-step")) {
+      updateStarCounter();
+    }
+  });
+
+  taskSection.addEventListener("input", (e) => {
+    if (e.target.classList.contains("editable-cell")) {
+      const row = e.target.closest("tr");
+      const starBtn = row.querySelector(".star-step");
+
+      if (starBtn && starBtn.checked) {
+        updateStarCounter();
+      }
+    }
+  });
 });
 
 const starTaskArray = new Array(3);
@@ -34,7 +57,7 @@ function clearNotesArea(button) {
         const isConfirmed = confirm("Are you sure you want to clear?");
 
         if (isConfirmed) {
-          currentText = "";
+          notesElement.value = "";
           alert("Your notes have been cleared!");
         }
       }
@@ -51,16 +74,6 @@ function countCheckedCheckboxes(className) {
 
 function countAllCheckboxes(className) {
   return document.querySelectorAll(`.${className}`).length;
-}
-
-function setupProgressTracker(className, progressElementId) {
-  const allCheckboxes = document.querySelectorAll(`.${className}`);
-  allCheckboxes.forEach((checkbox) => {
-    checkbox.addEventListener("change", () => {
-      updateProgress(className, progressElementId);
-    });
-  });
-  updateProgress(className, progressElementId);
 }
 
 function updateProgress(className, progressElementId) {
@@ -99,14 +112,63 @@ function handleAddStep(event) {
 
   inputStep.value = "";
   inputStep.placeholder = "Enter new step...";
+  //Keeps the focus on the input so the user can keep typing more steps
+  inputStep.focus();
 
   attachRemoveStepListener(newRow.querySelector(".remove-step"));
-  setupProgressTracker("steps", "tasks-progress-bar");
+
+  const detailsElement = form.closest("details");
+
+  if (detailsElement && tableElement.querySelectorAll("tr").length == 2) {
+    detailsElement.classList.add("urgent");
+  }
 }
 function attachRemoveStepListener(button) {
   button.addEventListener("click", function () {
-    this.closest("tr").remove();
+    const row = this.closest("tr");
+    const table = this.closest("table");
+    const detailsElement = this.closest("details");
+
+    if (row) row.remove();
+
+    const remainingRows = table.querySelectorAll("tr").length;
+
+    if (remainingRows <= 1 && detailsElement) {
+      detailsElement.classList.remove("urgent");
+      detailsElement.classList.remove("in-progress");
+    }
 
     updateProgress("steps", "tasks-progress-bar");
+    updateStarCounter();
+  });
+}
+
+function updateStarCounter() {
+  //Update the overall counter
+  const starredCheckboxes = document.querySelectorAll(".star-step:checked");
+  const starDisplay = document.getElementById("stars");
+
+  if (starDisplay) {
+    starDisplay.textContent = starredCheckboxes.length;
+  }
+
+  const critSpans = [
+    document.getElementById("critOne"),
+    document.getElementById("critTwo"),
+    document.getElementById("critThree"),
+  ];
+
+  critSpans.forEach((span) => {
+    if (span) span.textContent = "";
+  });
+
+  starredCheckboxes.forEach((checkboxes, index) => {
+    if (index < 3) {
+      const row = checkboxes.closest("tr");
+      const taskText = row.querySelector(".editable-cell").textContent;
+      if (critSpans[index]) {
+        critSpans[index].textContent = taskText || "(Empty Task)";
+      }
+    }
   });
 }
