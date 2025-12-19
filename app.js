@@ -146,10 +146,25 @@ function attachRemoveStepListener(button) {
 function updateStarCounter() {
   //Update the overall counter
   const starredCheckboxes = document.querySelectorAll(".star-step:checked");
-  const starDisplay = document.getElementById("stars");
+  const allStarCheckboxes = document.querySelectorAll(".star-step");
 
+  const starDisplay = document.getElementById("stars");
   if (starDisplay) {
     starDisplay.textContent = starredCheckboxes.length;
+  }
+
+  if (starredCheckboxes.length >= 3) {
+    allStarCheckboxes.forEach((cb) => {
+      if (!cb.checked) {
+        cb.classList.add("limited");
+        cb.onclick = (e) => e.preventDefault();
+      }
+    });
+  } else {
+    allStarCheckboxes.forEach((cb) => {
+      cb.classList.remove("limited");
+      cb.onclick = null;
+    });
   }
 
   const critSpans = [

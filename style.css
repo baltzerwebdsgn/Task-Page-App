@@ -319,7 +319,9 @@ input[type="checkbox"].star-step:checked::after {
   color: #d64545;
 }
 input[type="checkbox"].limited:hover {
+  opacity: 0.5;
   cursor: not-allowed;
+  filter: grayscale(1);
 }
 input[type="text"].add-task-input {
   padding: 0;
