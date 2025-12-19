@@ -1,5 +1,20 @@
 //Upon page load
 document.addEventListener("DOMContentLoaded", (event) => {
+  const source = document.getElementById("editor");
+  const target = document.getElementById("main-title");
+
+  source.addEventListener("input", function () {
+    // If the user deletes everything, provide a fallback for the H1
+    target.innerText =
+      source.innerText.trim() === "" ? "Untitled" : source.innerText;
+  });
+  source.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      source.blur();
+    }
+  });
+
   //Clear notes functionality
   const clearNotesButton = document.getElementById("clear-notes-button");
 
