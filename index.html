@@ -10,7 +10,7 @@
     <header class="row-top">
       <div class="card" id="titleCard">
         <div class="image-container">
-          <h1 class="overlay-text">Project</h1>
+          <h1 class="overlay-text project-title">Project</h1>
           <img
             class="card-img"
             src="https://picsum.photos/seed/picsum/200/300"
@@ -43,90 +43,80 @@
     </header>
     <main class="row-bottom">
       <section class="card span-2">
-        <h2>Project</h2>
-        <span>Starred Tasks: 0/3</span>
+        <h2 class="project-title">Project</h2>
+        <p>Starred Tasks: <span id="stars">0</span>/3</p>
         <ol>
-          <details class="in-progress">
+          <details class="">
             <summary>
               <input type="text" class="task-title" value="TASK ONE" />
             </summary>
-            <ul id="task-list-1">
-              <li>
-                <input type="checkbox" class="neu-checkbox steps" />
-                <input class="tasks" type="text" value="Example step" />
-                <button class="remove-step">&#128473;</button>
+            <table id="task-list-1">
+              <tr>
+                <th>Done</th>
+                <th>Steps</th>
+                <th>Delete</th>
+                <th>Star</th>
+              </tr>
+            </table>
+            <div class="new-task-line">
+              <form class="add-step-form" data-list-id="task-list-1">
+                <input type="submit" value="+" class="add-task add-button" />
                 <input
-                  type="checkbox"
-                  class="neu-checkbox star-task limited"
-                  disabled
+                  type="text"
+                  placeholder="Enter new step..."
+                  value=""
+                  class="add-task add-task-input"
                 />
-              </li>
-              <li>
-                <input type="checkbox" class="neu-checkbox steps" />
-                <input class="tasks" type="text" value="Example step" />
-                <button class="remove-step">&#128473;</button>
-                <input type="checkbox" class="neu-checkbox star-task" />
-              </li>
-              <li>
-                <input type="checkbox" class="neu-checkbox steps" />
-                <input class="tasks" type="text" value="Example step" />
-                <button class="remove-step">&#128473;</button>
-                <input type="checkbox" class="neu-checkbox star-task" />
-              </li>
-              <li class="new-task-line">
-                <form class="add-step-form" data-list-id="task-list-1">
-                  <input type="submit" value="+" class="add-task add-button" />
-                  <input
-                    type="text"
-                    placeholder="Enter new step..."
-                    value=""
-                    class="add-task add-task-input"
-                  />
-                </form>
-              </li>
-            </ul>
+              </form>
+            </div>
           </details>
-          <details class="urgent">
+          <details class="">
             <summary>
               <input type="text" class="task-title" value="TASK TWO" />
             </summary>
-            <ul id="task-list-2">
-              <li class="new-task-line">
-                <form class="add-step-form" data-list-id="task-list-2">
-                  <input type="submit" value="+" class="add-task add-button" />
-                  <input
-                    type="text"
-                    placeholder="Enter new step..."
-                    value=""
-                    class="add-task add-task-input"
-                  />
-                </form>
-              </li>
-            </ul>
-          </details>
+            <table id="task-list-2">
+              <tr>
+                <th>Done</th>
+                <th>Steps</th>
+                <th>Delete</th>
+                <th>Star</th>
+              </tr>
+            </table>
+            <div class="new-task-line">
+              <form class="add-step-form" data-list-id="task-list-2">
+                <input type="submit" value="+" class="add-task add-button" />
+                <input
+                  type="text"
+                  placeholder="Enter new step..."
+                  value=""
+                  class="add-task add-task-input"
+                />
+              </form>
+            </div>
+          </details class="">
           <details>
             <summary>
               <input type="text" class="task-title" value="TASK THREE" />
             </summary>
-            <ul id="task-list-3">
-              <li>
-                <input type="checkbox" class="neu-checkbox steps" />
-                <input class="tasks" type="text" value="Example step" />
-                <button class="remove-step">&#128473;</button>
-                <input type="checkbox" class="neu-checkbox star-task" />
-              </li>
-              <li class="new-task-line">
-                <form class="add-step-form" data-list-id="task-list-3">
-                  <input type="submit" value="+" class="add-task add-button" />
-                  <input
-                    type="text"
-                    placeholder="Enter new step..."
-                    value=""
-                    class="add-task add-task-input"
-                  />
-                </form>
-              </li>
-            </ul>
+            <table id="task-list-3">
+              <tr>
+                <th>Done</th>
+                <th>Steps</th>
+                <th>Delete</th>
+                <th>Star</th>
+              </tr>
+            </table>
+            <div class="new-task-line">
+              <form class="add-step-form" data-list-id="task-list-3">
+                <input type="submit" value="+" class="add-task add-button" />
+                <input
+                  type="text"
+                  placeholder="Enter new step..."
+                  value=""
+                  class="add-task add-task-input"
+                />
+              </form>
+            </div>
           </details>
         </ol>
       </section>

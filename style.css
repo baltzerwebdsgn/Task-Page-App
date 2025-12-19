@@ -170,11 +170,6 @@ details ul li {
   margin: 5px 0;
 }
 
-/* Ensure the paragraph doesn't have extra bottom margin */
-details ul li p {
-  margin: 0;
-  display: inline; /* Changes it from block to inline behavior */
-}
 summary {
   display: flex; /* Allows us to align the dot and text */
   align-items: center; /* Centers the dot vertically with the text */
@@ -269,7 +264,7 @@ p.critical {
   box-shadow: inset 6px 6px 12px rgba(174, 174, 192, 0.4),
     inset -6px -6px 12px #ffffff;
   border-radius: 16px;
-  margin-top: 10px;
+  margin: 10px auto;
 }
 
 input[type="checkbox"].neu-checkbox {
@@ -312,7 +307,7 @@ input[type="checkbox"].neu-checkbox:checked::after {
   font-size: 16px;
   font-weight: bold;
 }
-input[type="checkbox"].star-task:checked::after {
+input[type="checkbox"].star-step:checked::after {
   content: "\2726";
   font-size: 16px;
   color: #d64545;
@@ -324,4 +319,47 @@ input[type="text"].add-task-input {
   padding: 0;
   margin: 0 34px;
   width: 225px;
+}
+table {
+  display: grid;
+  margin: 0 34px;
+  width: 95%;
+  /* Define 4 columns: small, large (flexible), small, small */
+  grid-template-columns: 60px 1fr 80px 60px;
+}
+
+/* Make rows and headers behave like grid contents */
+thead,
+tbody,
+tr {
+  display: contents;
+}
+
+th,
+td {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  min-height: 40px;
+  border-bottom: 1px solid #eee;
+}
+td:nth-child(2) {
+  justify-content: flex-start;
+  padding-left: 15px;
+}
+.editable-cell {
+  text-align: left;
+  width: 100%;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+p {
+  text-align: right;
+}
+form {
+  justify-content: flex-start;
+}
+p.critical {
+  text-align: left;
 }

@@ -1,8 +1,5 @@
 //Upon page load
 document.addEventListener("DOMContentLoaded", (event) => {
-  //tasks progress bar functionality
-  setupProgressTracker("steps", "tasks-progress-bar");
-
   //Clear notes functionality
   const clearNotesButton = document.getElementById("clear-notes-button");
 
@@ -81,37 +78,34 @@ function handleAddStep(event) {
   event.preventDefault();
 
   const form = event.target;
+
+  const tableId = form.getAttribute("data-list-id");
+  const tableElement = document.getElementById(tableId);
+
   const inputStep = form.querySelector(".add-task-input");
   const stepText = inputStep.value.trim();
 
-  if (stepText === "") {
+  if (stepText === "" || !tableElement) {
     return;
   }
 
-  const ulElement = form.closest("ul");
-  const formRow = form.parentElement;
+  const newRow = document.createElement("tr");
+  newRow.innerHTML = `<td><input type="checkbox" class="neu-checkbox steps" /></td>
+                <td contenteditable="true" class="editable-cell">${stepText}</td>
+                <td><button class="remove-step">X</button></td>
+                <td><input type="checkbox" class="neu-checkbox star-step" /></td>`;
 
-  if (!ulElement) {
-    console.error("Could not find the parent list for this form.");
-    return;
-  }
-  const newLi = document.createElement("li");
-  newLi.innerHTML = `<input type="checkbox" class="neu-checkbox steps"/>
-                <input class="tasks" type="text" value="${stepText}"/>
-                <button class="remove-step">&#128473;</button>
-                <input type="checkbox" class="neu-checkbox star-task"/>`;
-
-  ulElement.insertBefore(newLi, formRow);
+  tableElement.appendChild(newRow);
 
   inputStep.value = "";
   inputStep.placeholder = "Enter new step...";
 
-  attachRemoveStepListener(newLi.querySelector(".remove-step"));
+  attachRemoveStepListener(newRow.querySelector(".remove-step"));
   setupProgressTracker("steps", "tasks-progress-bar");
 }
 function attachRemoveStepListener(button) {
   button.addEventListener("click", function () {
-    this.parentElement.remove();
+    this.closest("tr").remove();
 
     updateProgress("steps", "tasks-progress-bar");
   });
