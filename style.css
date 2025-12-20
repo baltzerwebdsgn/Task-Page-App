@@ -386,3 +386,8 @@ p.critical {
   white-space: nowrap;
   overflow: hidden;
 }
+p.task-title {
+  text-align: left;
+  position: relative;
+  z-index: 10;
+}

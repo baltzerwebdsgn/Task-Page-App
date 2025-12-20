@@ -20,6 +20,32 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
   clearNotesArea(clearNotesButton);
 
+  const summaryElements = document.querySelectorAll(".summary-class");
+
+  summaryElements.forEach((s) => {
+    s.addEventListener("keydown", (e) => {
+      // if (e.key === " " || e.code === "Space") {
+      //   console.log("5");
+      //   e.stopPropagation();
+      // }
+      if (e.key === "Enter") {
+        e.preventDefault();
+        e.stopPropagation();
+        e.target.blur();
+      }
+    });
+    s.addEventListener("click", (e) => {
+      console.log("2");
+      e.stopPropagation();
+    });
+    s.addEventListener("keyup", (e) => {
+      if (e.key === " " || e.code === "Space") {
+        console.log(s.parentNode);
+        s.parentNode.open = false;
+      }
+    });
+  });
+
   //Add task steps functionality
   const addForms = document.querySelectorAll(".add-step-form");
 
@@ -39,6 +65,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
   taskSection.addEventListener("change", (e) => {
     if (e.target.classList.contains("steps")) {
       updateProgress("steps", "tasks-progress-bar");
+
+      const parentDetails = e.target.closest("details");
+      updateTaskStatus(parentDetails);
     }
 
     if (e.target.classList.contains("star-step")) {
@@ -133,11 +162,13 @@ function handleAddStep(event) {
   attachRemoveStepListener(newRow.querySelector(".remove-step"));
 
   const detailsElement = form.closest("details");
+  updateTaskStatus(detailsElement);
 
-  if (detailsElement && tableElement.querySelectorAll("tr").length == 2) {
-    detailsElement.classList.add("urgent");
-  }
+  updateProgress("steps", "tasks-progress-bar");
+
+  updateStarCounter();
 }
+
 function attachRemoveStepListener(button) {
   button.addEventListener("click", function () {
     const row = this.closest("tr");
@@ -148,11 +179,7 @@ function attachRemoveStepListener(button) {
 
     const remainingRows = table.querySelectorAll("tr").length;
 
-    if (remainingRows <= 1 && detailsElement) {
-      detailsElement.classList.remove("urgent");
-      detailsElement.classList.remove("in-progress");
-    }
-
+    updateTaskStatus(detailsElement);
     updateProgress("steps", "tasks-progress-bar");
     updateStarCounter();
   });
@@ -201,4 +228,24 @@ function updateStarCounter() {
       }
     }
   });
+}
+function updateTaskStatus(detailsElement) {
+  if (!detailsElement) return;
+
+  const checkboxes = detailsElement.querySelectorAll(".steps");
+  const checkedCount = detailsElement.querySelectorAll(".steps:checked").length;
+  const totalCount = checkboxes.length;
+
+  detailsElement.classList.remove("in-progress", "completed", "urgent");
+
+  if (totalCount === 0) {
+    return;
+  }
+  if (checkedCount === totalCount) {
+    detailsElement.classList.add("completed");
+  } else if (checkedCount > 0) {
+    detailsElement.classList.add("in-progress");
+  } else {
+    detailsElement.classList.add("urgent");
+  }
 }
