@@ -24,10 +24,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
   summaryElements.forEach((s) => {
     s.addEventListener("keydown", (e) => {
-      // if (e.key === " " || e.code === "Space") {
-      //   console.log("5");
-      //   e.stopPropagation();
-      // }
       if (e.key === "Enter") {
         e.preventDefault();
         e.stopPropagation();
