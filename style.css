@@ -391,3 +391,17 @@ p.task-title {
   position: relative;
   z-index: 10;
 }
+.timer-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  gap: var(--gap);
+}
+#play-pause-button {
+  width: 50px;
+}
+#reset-timer-button {
+  font-size: x-large;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+}

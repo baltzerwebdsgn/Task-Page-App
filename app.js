@@ -14,12 +14,16 @@ document.addEventListener("DOMContentLoaded", (event) => {
       source.blur();
     }
   });
+  const playPauseButton = document.getElementById("play-pause-button");
+  const timerResetButton = document.getElementById("reset-timer-button");
+
+  setupTimer(playPauseButton, timerResetButton);
 
   //Clear notes functionality
   const clearNotesButton = document.getElementById("clear-notes-button");
-
   clearNotesArea(clearNotesButton);
 
+  //Task title corrections
   const summaryElements = document.querySelectorAll(".summary-class");
 
   summaryElements.forEach((s) => {
@@ -31,12 +35,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
       }
     });
     s.addEventListener("click", (e) => {
-      console.log("2");
       e.stopPropagation();
     });
+    //Hacky solution to solve the bug when opening the
     s.addEventListener("keyup", (e) => {
       if (e.key === " " || e.code === "Space") {
-        console.log(s.parentNode);
         s.parentNode.open = false;
       }
     });
@@ -82,9 +85,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
     }
   });
 });
-
-const starTaskArray = new Array(3);
-const starTaskCounter = 0;
 
 function clearNotesArea(button) {
   const notesElement = document.getElementById("notes-area");
@@ -244,4 +244,62 @@ function updateTaskStatus(detailsElement) {
   } else {
     detailsElement.classList.add("urgent");
   }
+}
+
+let timerInterval = null;
+let isRunning = false;
+
+function setupTimer(playBtn, resetBtn) {
+  playBtn.addEventListener("click", () => {
+    if (isRunning) {
+      pauseTimer();
+    } else {
+      startTimer();
+    }
+  });
+
+  resetBtn.addEventListener("click", () => {
+    pauseTimer();
+    document.getElementById("minutes").innerText = "30";
+    document.getElementById("seconds").innerText = "00";
+  });
+}
+
+function startTimer() {
+  isRunning = true;
+
+  document.getElementById("play-pause-button").style.opacity = "0.5";
+
+  timerInterval = setInterval(() => {
+    let minutesElement = document.getElementById("minutes");
+    let secondsElement = document.getElementById("seconds");
+
+    let minutes = parseInt(minutesElement.innerText);
+    let seconds = parseInt(secondsElement.innerText);
+
+    if (seconds === 0) {
+      if (minutes === 0) {
+        // Timer Finished
+        clearInterval(timerInterval);
+        isRunning = false;
+        alert("Time is up!");
+        return;
+      } else {
+        minutes--;
+        seconds = 59;
+      }
+    } else {
+      seconds--;
+    }
+
+    // Update Display with padding (e.g., 09 instead of 9)
+    minutesElement.innerText = minutes.toString().padStart(2, "0");
+    secondsElement.innerText = seconds.toString().padStart(2, "0");
+  }, 1000);
+}
+
+function pauseTimer() {
+  isRunning = false;
+  clearInterval(timerInterval);
+  document.getElementById("play-pause-button").style.opacity = "1";
 }
