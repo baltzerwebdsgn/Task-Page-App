@@ -98,7 +98,6 @@ function clearNotesArea(button) {
 
         if (isConfirmed) {
           notesElement.value = "";
-          alert("Your notes have been cleared!");
         }
       }
     });
@@ -267,10 +266,16 @@ function setupTimer(playBtn, resetBtn) {
 
 function startTimer() {
   isRunning = true;
-
+  const timerDisplay = document.querySelector(".timer-container");
   document.getElementById("play-pause-button").style.opacity = "0.5";
 
-  timerInterval = setInterval(() => {
+  // 1. Run the logic once IMMEDIATELY
+  tick();
+
+  // 2. Then set the interval to run every second after that
+  timerInterval = setInterval(tick, 1000);
+
+  function tick() {
     let minutesElement = document.getElementById("minutes");
     let secondsElement = document.getElementById("seconds");
 
@@ -279,10 +284,9 @@ function startTimer() {
 
     if (seconds === 0) {
       if (minutes === 0) {
-        // Timer Finished
         clearInterval(timerInterval);
         isRunning = false;
-        alert("Time is up!");
+        timerDisplay.classList.add("timer-finished");
         return;
       } else {
         minutes--;
@@ -292,10 +296,10 @@ function startTimer() {
       seconds--;
     }
 
-    // Update Display with padding (e.g., 09 instead of 9)
+    // Update Display
     minutesElement.innerText = minutes.toString().padStart(2, "0");
     secondsElement.innerText = seconds.toString().padStart(2, "0");
-  }, 1000);
+  }
 }
 
 function pauseTimer() {
